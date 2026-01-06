@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>5 Letra (Filipino Word Game)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Play the ultimate Filipino word game! Solve 5, 6, or 7-letter puzzles in Filipino or English with 5 Letra."
+  />
+  <link rel="icon" type="image/png" href="img/app_logo.png" />
+
+  <style>
+    :root {
+      --primary: #2a4d8f;
+      --primary-soft: #e3eafc;
+      --accent: #ffb347;
+      --bg: #f7f8fa;
+      --text: #222;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 18px 60px 18px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text span:first-child {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .brand-text span:last-child {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    nav a {
+      margin-left: 16px;
+      font-size: 0.9rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.3rem;
+      margin: 0 0 10px 0;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    .hero-text h2 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin: 0 0 18px 0;
+      color: #555;
+    }
+
+    .hero-text p {
+      margin: 0 0 20px 0;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(42, 77, 143, 0.35);
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #234172;
+    }
+
+    .cta-note {
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .hero-media {
+      background: #fff;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .hero-main-shot {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .hero-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .hero-thumbs img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      height: 60px;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 22px 22px 22px;
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+      margin-bottom: 26px;
+    }
+
+    section h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: var(--primary);
+      border-left: 4px solid var(--primary-soft);
+      padding-left: 10px;
+      margin-bottom: 14px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 26px;
+      font-size: 0.95rem;
+    }
+
+    .feature-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #2a4d8f;
+    }
+
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .screenshots-grid img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .how-to-play ol {
+      padding-left: 1.25rem;
+      margin: 0;
+    }
+
+    .how-to-play li {
+      margin-bottom: 6px;
+    }
+
+    footer {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: #777;
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 6px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-media {
+        order: -1;
+      }
+      .screenshots-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .features-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      nav {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .hero-text h1 {
+        font-size: 1.8rem;
+      }
+      .screenshots-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <div class="brand">
+        <img src="img/app_logo.png" alt="5 Letra App Logo" />
+        <div class="brand-text">
+          <span>5 Letra</span>
+          <span>Filipino &amp; English Word Game</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#how-to-play">How to Play</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-text">
+          <h1 id="hero-title">5 Letra (Filipino Word Game)</h1>
+          <h2>Play the ultimate Filipino word game! Solve 5, 6, or 7-letter puzzles.</h2>
+          <p>
+            Test your Filipino and English vocabulary in bite-sized, brain-teasing puzzles.
+            Choose your difficulty, switch themes, and unlock achievements as you play.
+          </p>
+
+          <div class="badges">
+            <span class="badge">Filipino &amp; English</span>
+            <span class="badge">5, 6, &amp; 7-letter words</span>
+            <span class="badge">Achievements &amp; stats</span>
+            <span class="badge">Custom themes</span>
+          </div>
+
+          <div class="cta-row">
+            <!-- Replace # with your real Google Play link -->
+            <a
+              href="https://play.google.com/store/apps/details?id=aca.codequest.letrafilipinowordgame"
+              class="btn-primary"
+              aria-label="Get 5 Letra on Google Play"
+            >
+              Get it on Google Play
+            </a>
+            <span class="cta-note">Free to play • Optional cloud save via Google Play Games</span>
+          </div>
+        </div>
+
+        
+      </section>
+
+      <section id="features">
+        <h2>Game Features</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <strong>Bilingual Fun</strong>
+            Play in Filipino or English and grow your vocabulary in both
+            languages.
+          </div>
+          <div class="feature-item">
+            <strong>Choose Your Challenge</strong>
+            Start a new level with 5, 6, or 7-letter words for the difficulty
+            you want.
+          </div>
+          <div class="feature-item">
+            <strong>Personalize Your Profile</strong>
+            Pick an avatar, set your player name, and make the game truly yours.
+          </div>
+          <div class="feature-item">
+            <strong>Light &amp; Dark Themes</strong>
+            Switch between the clean Monokai-inspired light theme and the cozy
+            Night Owl dark theme.
+          </div>
+          <div class="feature-item">
+            <strong>Track Your Progress</strong>
+            Visit the “My Achievements” section to see milestones and how your
+            skills improve over time.
+          </div>
+          <div class="feature-item">
+            <strong>Cloud Save (Optional)</strong>
+            Use “Sync progress via Google Play” to save your progress and load
+            it on another device.
+          </div>
+        </div>
+      </section>
+
+      <section id="screenshots">
+        <h2>In-Game Screenshots</h2>
+        <p style="margin-bottom:14px;">
+          Take a peek at the gameplay and clean interface of 5 Letra:
+        </p>
+        <div class="screenshots-grid">
+          <img src="img/game_screenshot1.jpg" alt="5 Letra screenshot 1" />
+          <img src="img/game_screenshot2.jpg" alt="5 Letra screenshot 2" />
+          <img src="img/game_screenshot3.jpg" alt="5 Letra screenshot 3" />
+          <img src="img/game_screenshot4.jpg" alt="5 Letra screenshot 4" />
+          <img src="img/game_screenshot5.jpg" alt="5 Letra screenshot 5" />
+        </div>
+      </section>
+
+      <section id="how-to-play" class="how-to-play">
+        <h2>How to Play</h2>
+        <ol>
+          <li>Choose your language: Filipino or English.</li>
+          <li>Select your word length: 5, 6, or 7 letters.</li>
+          <li>Enter your guess and see which letters are correct or in the wrong place.</li>
+          <li>Use the feedback to narrow down the correct word.</li>
+          <li>Switch themes and check “My Achievements” as you progress.</li>
+          <li>
+            (Optional) Tap “Sync progress via Google Play” to save your progress and load
+            it on another device.
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        &copy; <span id="year"></span> CodeQuest Academy. All rights reserved.
+      </div>
+      <div>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
